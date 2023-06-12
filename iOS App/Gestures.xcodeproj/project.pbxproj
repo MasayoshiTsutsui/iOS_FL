@@ -10,7 +10,6 @@
 		7B322ADF22FEEDB2002C7C38 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B322ADE22FEEDB2002C7C38 /* Labels.swift */; };
 		7B322AE122FEFFE2002C7C38 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B322AE022FEFFE2002C7C38 /* Globals.swift */; };
 		7B43804B22B3C1730034AE3C /* Dataset in Resources */ = {isa = PBXBuildFile; fileRef = 7B43804A22B3C1730034AE3C /* Dataset */; };
-		7B43804D22B3C3410034AE3C /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 7B43804C22B3C3410034AE3C /* README.markdown */; };
 		7B43805322B3F2360034AE3C /* EvaluateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43805222B3F2360034AE3C /* EvaluateViewController.swift */; };
 		7B43806322B422E00034AE3C /* HandsTuri.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7B43806222B422E00034AE3C /* HandsTuri.mlmodel */; };
 		7B43806522B424CD0034AE3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43806422B424CD0034AE3C /* Helpers.swift */; };
@@ -50,7 +49,6 @@
 		7B322ADE22FEEDB2002C7C38 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		7B322AE022FEFFE2002C7C38 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		7B43804A22B3C1730034AE3C /* Dataset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Dataset; path = ../Dataset; sourceTree = "<group>"; };
-		7B43804C22B3C3410034AE3C /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.markdown; path = ../README.markdown; sourceTree = "<group>"; };
 		7B43805222B3F2360034AE3C /* EvaluateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateViewController.swift; sourceTree = "<group>"; };
 		7B43806222B422E00034AE3C /* HandsTuri.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandsTuri.mlmodel; sourceTree = "<group>"; };
 		7B43806422B424CD0034AE3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 		7B8AF19820D8311600DE58D5 = {
 			isa = PBXGroup;
 			children = (
-				7B43804C22B3C3410034AE3C /* README.markdown */,
 				7B43804A22B3C1730034AE3C /* Dataset */,
 				7B43806122B422E00034AE3C /* Models */,
 				7B8AF1A320D8311600DE58D5 /* Sources */,
@@ -281,7 +278,6 @@
 				7B8AF1AC20D8311700DE58D5 /* Assets.xcassets in Resources */,
 				7BABEFFA22B7E9C2005C8BCF /* Main.storyboard in Resources */,
 				7BABEFF322B7E9A5005C8BCF /* EvaluateCell.xib in Resources */,
-				7B43804D22B3C3410034AE3C /* README.markdown in Resources */,
 				7B43804B22B3C1730034AE3C /* Dataset in Resources */,
 				7BABEFF822B7E9B6005C8BCF /* SectionHeaderView.xib in Resources */,
 			);

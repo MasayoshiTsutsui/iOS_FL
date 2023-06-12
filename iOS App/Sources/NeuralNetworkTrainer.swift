@@ -137,7 +137,8 @@ class NeuralNetworkTrainer {
 
         let model = context.model
 
-          self.printModelParams(model)
+        self.printModelParams(model)
+        self.loadFileFromServer()
 
         // This happens when there is some kind of error, for example if the
         // batch provider returns an invalid MLFeatureProvider object.
@@ -171,6 +172,34 @@ class NeuralNetworkTrainer {
       print("Error training neural network:", error)
       callback(.error)
     }
+  }
+
+  private func loadFileFromServer() {
+      guard let url = URL(string: "http://35.189.152.0:8080/hoge") else {
+        return
+      }
+    
+      let task = URLSession.shared.downloadTask(with: url) { (url, response, error) in
+          if let error = error {
+              print("Error: \(error)")
+              return
+          }
+        
+          // ファイルのダウンロードが成功した場合、urlに保存されているローカルファイルにアクセスできます
+          if let localURL = url {
+              do {
+                  let contents = try String(contentsOf: localURL)
+                  print("File contents:\n\(contents)")
+                
+                  // ファイルの処理を行う
+                  // ...
+              } catch {
+                  print("Error reading file: \(error)")
+              }
+          }
+      }
+    
+      task.resume()
   }
 
   private func printModelParams(_ model: MLModel) {
