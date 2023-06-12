@@ -215,9 +215,51 @@ class NeuralNetworkTrainer {
 
     let rawWeights = self.convertToRegularArray(weights)
     let rawBiases = self.convertToRegularArray(biases)
+
+    guard let url = URL(string: "http://35.189.152.0:8080/float_array") else {
+        print("Invalid URL")
+        return
+    }
     
-    print("Weights:", rawWeights)
-    print("Biases:", rawBiases)
+    // Create the request body as a dictionary
+    let requestBody: [String: Any] = [
+        "weights": rawWeights,
+        "biases": rawBiases
+    ]
+    
+    do {
+        // Convert the request body to JSON data
+        let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+        
+        // Create the URL request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        // Perform the request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            // Handle the response if needed
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Response status code: \(httpResponse.statusCode)")
+                // Handle the response data if needed
+                if let responseData = data {
+                    let responseString = String(data: responseData, encoding: .utf8)
+                    print("Response data: \(responseString ?? "")")
+                }
+            }
+        }
+        
+        task.resume()
+    } catch {
+        print("Error creating JSON data: \(error)")
+    }
+    
 }
 
   private func convertToRegularArray(_ multiArray: MLMultiArray) -> [Float] {
