@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UIKit
+import CoreML
 
 class LoadModelViewController: UIViewController {
     @IBOutlet var loadModelButton: UIButton!
@@ -56,6 +57,9 @@ class LoadModelViewController: UIViewController {
                 do {
                     try? fileManager.removeItem(at: destinationURL) // 既存のファイルがある場合は削除
                     try fileManager.moveItem(at: localURL, to: destinationURL) // ファイルをリネームして移動
+                    let compiledUrl = try MLModel.compileModel(at: destinationURL)
+                    let model = try MLModel(contentsOf: compiledUrl)
+                    print("Compiled mlmodel file: \(compiledUrl.lastPathComponent)")
                     print("Downloaded file: \(destinationURL.lastPathComponent)")
                     completion(true)
                 } catch {
@@ -78,3 +82,17 @@ class LoadModelViewController: UIViewController {
         return destinationURL
     }
 }
+
+func printFilesInDocumentsDirectory() {
+    let fileManager = FileManager.default
+    do {
+        let documentsURL = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+        for fileURL in fileURLs {
+            print(fileURL.lastPathComponent)
+        }
+    } catch {
+        print("Error accessing Documents directory: \(error)")
+    }
+}
+
