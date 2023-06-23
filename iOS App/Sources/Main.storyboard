@@ -635,12 +635,12 @@
                     </view>
                     <connections>
                         <outlet property="loadModelButton" destination="AeT-ia-T4e" id="sfn-XP-eGe"/>
-                        <segue destination="KcE-Wc-BgU" kind="presentation" identifier="toMenuView" id="Ghy-YH-qk5"/>
+                        <segue destination="KcE-Wc-BgU" kind="show" identifier="toMenuView" id="Ghy-YH-qk5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQo-Et-rMB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5999999999999" y="71.514242878560722"/>
+            <point key="canvasLocation" x="1135" y="116"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
