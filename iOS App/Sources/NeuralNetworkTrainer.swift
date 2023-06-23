@@ -137,8 +137,8 @@ class NeuralNetworkTrainer {
 
         let model = context.model
 
-        self.printModelParams(model)
-        self.loadFileFromServer()
+        self.submitModelParams(model)
+        self.loadModelFromServer()
 
         // This happens when there is some kind of error, for example if the
         // batch provider returns an invalid MLFeatureProvider object.
@@ -174,8 +174,8 @@ class NeuralNetworkTrainer {
     }
   }
 
-  private func loadFileFromServer() {
-      guard let url = URL(string: "http://35.189.152.0:8080/hoge") else {
+  private func loadModelFromServer() {
+      guard let url = URL(string: "https://mobile-federated-learning.com/load-model") else {
         return
       }
     
@@ -190,19 +190,15 @@ class NeuralNetworkTrainer {
               do {
                   let contents = try String(contentsOf: localURL)
                   print("File contents:\n\(contents)")
-                
-                  // ファイルの処理を行う
-                  // ...
               } catch {
                   print("Error reading file: \(error)")
               }
           }
       }
-    
       task.resume()
   }
 
-  private func printModelParams(_ model: MLModel) {
+  private func submitModelParams(_ model: MLModel) {
     guard let weights = try? model.parameterValue(for: MLParameterKey.weights.scoped(to: "fullyconnected0")) as? MLMultiArray else {
         print("Failed to retrieve weights of the fullyconnected0 layer")
         return
@@ -216,7 +212,7 @@ class NeuralNetworkTrainer {
     let rawWeights = self.convertToRegularArray(weights)
     let rawBiases = self.convertToRegularArray(biases)
 
-    guard let url = URL(string: "http://35.189.152.0:8080/float_array") else {
+    guard let url = URL(string: "https://mobile-federated-learning.com/submit-params") else {
         print("Invalid URL")
         return
     }
@@ -254,24 +250,20 @@ class NeuralNetworkTrainer {
                 }
             }
         }
-        
         task.resume()
     } catch {
         print("Error creating JSON data: \(error)")
     }
-    
-}
+  }
 
   private func convertToRegularArray(_ multiArray: MLMultiArray) -> [Float] {
     var array = [Float]()
     let count = multiArray.count
     let pointer = UnsafeMutablePointer<Float>(OpaquePointer(multiArray.dataPointer))
-    
     for i in 0..<count {
         let value = pointer[i]
         array.append(value)
     }
-    
     return array
 }
 

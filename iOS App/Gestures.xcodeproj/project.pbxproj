@@ -43,6 +43,7 @@
 		7BE1EF3822BD1D1700DC3AAE /* EvaluateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1EF3722BD1D1700DC3AAE /* EvaluateCell.swift */; };
 		7BE1EF3A22BD1D2500DC3AAE /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */; };
 		7BF7B37F214422CE0010448E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7B37E214422CE0010448E /* UIImage+Resize.swift */; };
+		A9CE6EB42A4568AE00AA4AF8 /* LoadModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		7BE1EF3722BD1D1700DC3AAE /* EvaluateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateCell.swift; sourceTree = "<group>"; };
 		7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		7BF7B37E214422CE0010448E /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				7BABEFF922B7E9C2005C8BCF /* Main.storyboard */,
 				7B8AF1A620D8311600DE58D5 /* MenuViewController.swift */,
+				A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				7B43805322B3F2360034AE3C /* EvaluateViewController.swift in Sources */,
 				7B72E0F9238DC2D100A1F15F /* NeuralNetworkTrainer.swift in Sources */,
 				7B89B54F22B6C73D002DBA36 /* Predictor.swift in Sources */,
+				A9CE6EB42A4568AE00AA4AF8 /* LoadModelViewController.swift in Sources */,
 				7B43807222B6783E0034AE3C /* CameraViewController.swift in Sources */,
 				7BE1EF3622BD1CF400DC3AAE /* SectionHeaderView.swift in Sources */,
 				7BE1EF3022BCD18500DC3AAE /* AddGestureViewController.swift in Sources */,

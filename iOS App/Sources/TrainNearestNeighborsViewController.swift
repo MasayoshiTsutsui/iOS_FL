@@ -4,6 +4,7 @@ import CoreML
 /**
   View controller for the "Training Nearest Neighbors" screen.
  */
+/*
 class TrainNearestNeighborsViewController: UITableViewController {
   @IBOutlet var trainButton: UIBarButtonItem!
   @IBOutlet var allButton: UIBarButtonItem!
@@ -225,3 +226,4 @@ class TrainNearestNeighborsViewController: UITableViewController {
     }
   }
 }
+*/

@@ -27,22 +27,6 @@ class MenuViewController: UITableViewController {
       viewController.imagesByLabel = ImagesByLabel(dataset: testingDataset)
       viewController.title = "Testing Data"
     }
-    else if segue.identifier == "TrainNearestNeighbors" {
-      let viewController = segue.destination as! TrainNearestNeighborsViewController
-      viewController.model = Models.loadTrainedNearestNeighbors()
-      viewController.imagesByLabel = ImagesByLabel(dataset: trainingDataset)
-    }
-    else if segue.identifier == "EvaluateNearestNeighbors" {
-      let viewController = segue.destination as! EvaluateViewController
-      viewController.model = Models.loadTrainedNearestNeighbors()
-      viewController.dataset = testingDataset
-      viewController.title = "k-Nearest Neighbors"
-    }
-    else if segue.identifier == "CameraNearestNeighbors" {
-      let viewController = segue.destination as! CameraViewController
-      viewController.model = Models.loadTrainedNearestNeighbors()
-      viewController.title = "k-Nearest Neighbors"
-    }
     else if segue.identifier == "TrainNeuralNetwork" {
       let viewController = segue.destination as! TrainNeuralNetworkViewController
       viewController.model = Models.loadTrainedNeuralNetwork()
