@@ -53,13 +53,14 @@ class LoadModelViewController: UIViewController {
             if let localURL = url {
                 let fileManager = FileManager.default
                 let destinationURL = self.getDestinationURL(for: "Hands2num_latest.mlmodel")
+                let compiledDestURL = self.getDestinationURL(for: "Hands2num_latest.mlmodelc")
                 
                 do {
                     try? fileManager.removeItem(at: destinationURL) // 既存のファイルがある場合は削除
                     try fileManager.moveItem(at: localURL, to: destinationURL) // ファイルをリネームして移動
-                    let compiledUrl = try MLModel.compileModel(at: destinationURL)
-                    let model = try MLModel(contentsOf: compiledUrl)
-                    print("Compiled mlmodel file: \(compiledUrl.lastPathComponent)")
+                    let compiledURL = try MLModel.compileModel(at: destinationURL)
+                    try fileManager.moveItem(at: compiledURL, to: compiledDestURL) // ファイルをリネームして移動
+                    print("Compiled mlmodel file: \(compiledDestURL.lastPathComponent)")
                     print("Downloaded file: \(destinationURL.lastPathComponent)")
                     completion(true)
                 } catch {

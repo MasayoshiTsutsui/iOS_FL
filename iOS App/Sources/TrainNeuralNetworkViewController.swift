@@ -43,7 +43,14 @@ class TrainNeuralNetworkViewController: UIViewController {
     headerLabel.font = UIFont.monospacedSystemFont(ofSize: 12, weight: .regular)
     headerLabel.sizeToFit()
 
-    trainer = NeuralNetworkTrainer(modelURL: Models.trainedNeuralNetworkURL,
+    /*trainer = NeuralNetworkTrainer(modelURL: Models.trainedNeuralNetworkURL,
+                                   trainingDataset: trainingDataset,
+                                   validationDataset: validationDataset,
+                                   imageConstraint: imageConstraint(model: model))
+     */
+    printFilesInDocumentsDirectory()
+    print(Models.Hands2numURL)
+    trainer = NeuralNetworkTrainer(modelURL: Models.Hands2numURL,
                                    trainingDataset: trainingDataset,
                                    validationDataset: validationDataset,
                                    imageConstraint: imageConstraint(model: model))

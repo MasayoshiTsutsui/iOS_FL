@@ -10,6 +10,7 @@ enum Models: String {
   case emptyNeuralNetwork = "HandsEmpty"
   case turiNeuralNetwork = "HandsTuri"
   case trainedNeuralNetwork = "NeuralNetwork"
+  case Hands2num = "Hands2num_latest"
 }
 
 /**
@@ -22,6 +23,10 @@ extension Models {
 
   static var trainedNeuralNetworkURL: URL {
     urlForModelInDocumentsDirectory(.trainedNeuralNetwork)
+  }
+    
+  static var Hands2numURL: URL {
+    urlForModelInDocumentsDirectory(.Hands2num)
   }
 
   private static func urlForModelInBundle(_ model: Models) -> URL {
