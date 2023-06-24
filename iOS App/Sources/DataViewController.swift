@@ -1,5 +1,4 @@
 import UIKit
-
 /**
   View controller for the "Training Data" and "Testing Data" screens.
 */
