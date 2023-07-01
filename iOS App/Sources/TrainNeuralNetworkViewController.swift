@@ -8,6 +8,7 @@ class TrainNeuralNetworkViewController: UIViewController {
   @IBOutlet var oneEpochButton: UIButton!
   @IBOutlet var tenEpochsButton: UIButton!
   @IBOutlet var stopButton: UIButton!
+  @IBOutlet var submitButton: UIButton!
   @IBOutlet var learningRateLabel: UILabel!
   @IBOutlet var learningRateSlider: UISlider!
   @IBOutlet var augmentationSwitch: UISwitch!
@@ -15,7 +16,7 @@ class TrainNeuralNetworkViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   @IBOutlet var headerLabel: UILabel!
   @IBOutlet var graphView: GraphView!
-  @IBOutlet var submitButton: UIButton!
+
 
   var model: MLModel!
   var trainingDataset: ImageDataset!
