@@ -7,7 +7,6 @@ import CoreML
 class TrainNeuralNetworkViewController: UIViewController {
   @IBOutlet var oneEpochButton: UIButton!
   @IBOutlet var tenEpochsButton: UIButton!
-  @IBOutlet var fiftyEpochsButton: UIButton!
   @IBOutlet var stopButton: UIButton!
   @IBOutlet var learningRateLabel: UILabel!
   @IBOutlet var learningRateSlider: UISlider!
@@ -16,12 +15,14 @@ class TrainNeuralNetworkViewController: UIViewController {
   @IBOutlet var tableView: UITableView!
   @IBOutlet var headerLabel: UILabel!
   @IBOutlet var graphView: GraphView!
+  @IBOutlet var submitButton: UIButton!
 
   var model: MLModel!
   var trainingDataset: ImageDataset!
   var validationDataset: ImageDataset!
   var trainer: NeuralNetworkTrainer!
   var isTraining = false
+  var doneTraining = false
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -94,12 +95,13 @@ class TrainNeuralNetworkViewController: UIViewController {
     startTraining(epochs: 10)
   }
 
-  @IBAction func fiftyEpochsTapped(_ sender: Any) {
-    startTraining(epochs: 50)
-  }
-
   @IBAction func stopTapped(_ sender: Any) {
     stopTraining()
+  }
+  @IBAction func submitTapped(_ sender: Any) {
+    if submitModelParams(self.model) {
+      self.performSegue(withIdentifier: "toSubmitSucceed", sender: nil)
+    }
   }
 
   @IBAction func learningRateSliderMoved(_ sender: UISlider) {
@@ -118,10 +120,10 @@ class TrainNeuralNetworkViewController: UIViewController {
   func updateButtons() {
     oneEpochButton.isEnabled = !isTraining
     tenEpochsButton.isEnabled = !isTraining
-    fiftyEpochsButton.isEnabled = !isTraining
     learningRateSlider.isEnabled = !isTraining
     augmentationSwitch.isEnabled = !isTraining
     stopButton.isEnabled = isTraining
+    submitButton.isEnabled = doneTraining && !isTraining
   }
 }
 
@@ -146,6 +148,7 @@ extension TrainNeuralNetworkViewController {
 
   func trainingStopped() {
     isTraining = false
+    doneTraining = true
     statusLabel.text = "Paused"
     updateButtons()
   }
@@ -204,4 +207,75 @@ fileprivate extension History.Event {
     s += String(String(format: "%5.2f", validationAccuracy * 100).prefix(5))
     return s
   }
+}
+    
+func submitModelParams(_ model: MLModel) -> Bool {
+  guard let weights = try? model.parameterValue(for: MLParameterKey.weights.scoped(to: "fullyconnected0")) as? MLMultiArray else {
+      print("Failed to retrieve weights of the fullyconnected0 layer")
+      return false
+  }
+    
+  guard let biases = try? model.parameterValue(for: MLParameterKey.biases.scoped(to: "fullyconnected0")) as? MLMultiArray else {
+      print("Failed to retrieve biases of the fullyconnected0 layer")
+      return false
+  }
+
+  let rawWeights = convertToRegularArray(weights)
+  let rawBiases = convertToRegularArray(biases)
+
+  guard let url = URL(string: "https://mobile-federated-learning.com/submit-params") else {
+      print("Invalid URL")
+      return false
+  }
+    
+  // Create the request body as a dictionary
+  let requestBody: [String: Any] = [
+      "weights": rawWeights,
+      "biases": rawBiases
+  ]
+    
+  do {
+      // Convert the request body to JSON data
+      let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+        
+      // Create the URL request
+      var request = URLRequest(url: url)
+      request.httpMethod = "POST"
+      request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      request.httpBody = jsonData
+        
+      // Perform the request
+      let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+          if let error = error {
+              print("Error: \(error)")
+              return
+          }
+            
+          // Handle the response if needed
+          if let httpResponse = response as? HTTPURLResponse {
+              print("Response status code: \(httpResponse.statusCode)")
+              // Handle the response data if needed
+              if let responseData = data {
+                  let responseString = String(data: responseData, encoding: .utf8)
+                  print("Response data: \(responseString ?? "")")
+              }
+          }
+      }
+      task.resume()
+  } catch {
+      print("Error creating JSON data: \(error)")
+  }
+  return true
+}
+
+
+func convertToRegularArray(_ multiArray: MLMultiArray) -> [Float] {
+  var array = [Float]()
+  let count = multiArray.count
+  let pointer = UnsafeMutablePointer<Float>(OpaquePointer(multiArray.dataPointer))
+  for i in 0..<count {
+      let value = pointer[i]
+      array.append(value)
+  }
+  return array
 }

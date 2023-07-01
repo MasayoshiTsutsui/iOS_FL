@@ -22,7 +22,7 @@ class LoadModelViewController: UIViewController {
         loadModelFromServer { success in
             DispatchQueue.main.async {
                 if success {
-                    self.loadModelButton.setTitle("Load Successful", for: .normal)
+                    self.loadModelButton.setTitle("Load Successfully", for: .normal)
                     self.loadModelButton.setTitleColor(.systemGreen, for: .normal)
                     print("最新のモデルがloadされました！")
                 } else {
@@ -54,10 +54,10 @@ class LoadModelViewController: UIViewController {
                 let fileManager = FileManager.default
                 let destinationURL = self.getDestinationURL(for: "Hands2num_latest.mlmodel")
                 let compiledDestURL = self.getDestinationURL(for: "Hands2num_latest.mlmodelc")
-                
                 do {
                     try? fileManager.removeItem(at: destinationURL) // 既存のファイルがある場合は削除
-                    try fileManager.moveItem(at: localURL, to: destinationURL) // ファイルをリネームして移動
+                    try fileManager.moveItem(at: localURL, to: destinationURL) // mlmodelファイルをリネームして移動
+                    try? fileManager.removeItem(at: compiledDestURL) // 既存のファイルがある場合は削除
                     let compiledURL = try MLModel.compileModel(at: destinationURL)
                     try fileManager.moveItem(at: compiledURL, to: compiledDestURL) // ファイルをリネームして移動
                     print("Compiled mlmodel file: \(compiledDestURL.lastPathComponent)")

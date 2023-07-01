@@ -137,9 +137,6 @@ class NeuralNetworkTrainer {
 
         let model = context.model
 
-        self.submitModelParams(model)
-        self.loadModelFromServer()
-
         // This happens when there is some kind of error, for example if the
         // batch provider returns an invalid MLFeatureProvider object.
         if context.task.state == .failed {
@@ -171,88 +168,6 @@ class NeuralNetworkTrainer {
     } catch {
       print("Error training neural network:", error)
       callback(.error)
-    }
-  }
-
-  private func loadModelFromServer() {
-      guard let url = URL(string: "https://mobile-federated-learning.com/load-model") else {
-        return
-      }
-    
-      let task = URLSession.shared.downloadTask(with: url) { (url, response, error) in
-          if let error = error {
-              print("Error: \(error)")
-              return
-          }
-        
-          // ファイルのダウンロードが成功した場合、urlに保存されているローカルファイルにアクセスできます
-          if let localURL = url {
-              do {
-                  let contents = try String(contentsOf: localURL)
-                  print("File contents:\n\(contents)")
-              } catch {
-                  print("Error reading file: \(error)")
-              }
-          }
-      }
-      task.resume()
-  }
-
-  private func submitModelParams(_ model: MLModel) {
-    guard let weights = try? model.parameterValue(for: MLParameterKey.weights.scoped(to: "fullyconnected0")) as? MLMultiArray else {
-        print("Failed to retrieve weights of the fullyconnected0 layer")
-        return
-    }
-    
-    guard let biases = try? model.parameterValue(for: MLParameterKey.biases.scoped(to: "fullyconnected0")) as? MLMultiArray else {
-        print("Failed to retrieve biases of the fullyconnected0 layer")
-        return
-    }
-
-    let rawWeights = self.convertToRegularArray(weights)
-    let rawBiases = self.convertToRegularArray(biases)
-
-    guard let url = URL(string: "https://mobile-federated-learning.com/submit-params") else {
-        print("Invalid URL")
-        return
-    }
-    
-    // Create the request body as a dictionary
-    let requestBody: [String: Any] = [
-        "weights": rawWeights,
-        "biases": rawBiases
-    ]
-    
-    do {
-        // Convert the request body to JSON data
-        let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
-        
-        // Create the URL request
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonData
-        
-        // Perform the request
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
-            
-            // Handle the response if needed
-            if let httpResponse = response as? HTTPURLResponse {
-                print("Response status code: \(httpResponse.statusCode)")
-                // Handle the response data if needed
-                if let responseData = data {
-                    let responseString = String(data: responseData, encoding: .utf8)
-                    print("Response data: \(responseString ?? "")")
-                }
-            }
-        }
-        task.resume()
-    } catch {
-        print("Error creating JSON data: \(error)")
     }
   }
 
