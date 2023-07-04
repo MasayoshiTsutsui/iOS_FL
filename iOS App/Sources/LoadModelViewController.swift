@@ -16,22 +16,22 @@ class LoadModelViewController: UIViewController {
 
     @IBAction func loadLatestModel() {
         print("loadLatestModel called!")
-        self.loadModelButton.setTitle("Loading the latest model...", for: .normal)
+        self.loadModelButton.setTitle("モデルを\nロード中...", for: .normal)
         self.loadModelButton.setTitleColor(.systemBlue, for: .normal)
         
         loadModelFromServer { success in
             DispatchQueue.main.async {
                 if success {
-                    self.loadModelButton.setTitle("Load Successfully", for: .normal)
+                    self.loadModelButton.setTitle("最新のモデルが\nロードされました！", for: .normal)
                     self.loadModelButton.setTitleColor(.systemGreen, for: .normal)
                     print("最新のモデルがloadされました！")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.performSegue(withIdentifier: "toMenuView", sender: nil)
+                    }
                 } else {
-                    self.loadModelButton.setTitle("Load Failed", for: .normal)
+                    self.loadModelButton.setTitle("モデルのロードに失敗しました.\n通信環境を確認してください.", for: .normal)
                     self.loadModelButton.setTitleColor(.systemRed, for: .normal)
                     print("モデルの読み込みに失敗しました.")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.performSegue(withIdentifier: "toMenuView", sender: nil)
                 }
             }
         }
