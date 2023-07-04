@@ -57,7 +57,7 @@ extension Models {
   }
 
   static func loadTrainedNeuralNetwork() -> MLModel? {
-    loadModel(url: trainedNeuralNetworkURL)
+    loadModel(url: Hands2numURL)
   }
 }
 

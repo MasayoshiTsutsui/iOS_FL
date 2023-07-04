@@ -58,6 +58,9 @@ class Labels {
   private func readLabelNames() {
     do {
       let data = try Data(contentsOf: labelNamesURL)
+      print(data)
+      print("in readLabelNames!!!!!!")
+        
       labelNames = try JSONDecoder().decode(Array<String>.self, from: data)
     } catch {
       labelNames = builtinLabelNames
@@ -94,6 +97,9 @@ class Labels {
     is no difference between internal labels and user-chosen labels.)
    */
   func userLabel(for internalLabel: String) -> String {
+    print(internalLabel)
+    print(labelNames)
+    print("userLabel called.")
     if let idx = internalLabelIndices[internalLabel], idx < labelNames.count {
       return labelNames[idx]
     } else {
