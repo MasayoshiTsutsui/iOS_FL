@@ -58,9 +58,12 @@ class TrainNeuralNetworkViewController: UIViewController {
                                    imageConstraint: imageConstraint(model: model))
 
     assert(model.modelDescription.isUpdatable)
-    //print(model.modelDescription.trainingInputDescriptionsByName)
+    //print(model.modelDescription.trainingInputDescriptionsByName
 
     NotificationCenter.default.addObserver(self, selector: #selector(appWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+      
+    history.delete()
+    compileModel()
   }
 
   deinit {
@@ -280,3 +283,27 @@ func convertToRegularArray(_ multiArray: MLMultiArray) -> [Float] {
   }
   return array
 }
+
+func compileModel() {
+        let fileManager = FileManager.default
+        let destinationURL = getDestinationURL(for: "Hands2num_latest.mlmodel")
+        let compiledDestURL = getDestinationURL(for: "Hands2num_latest.mlmodelc")
+        do {
+            try? fileManager.removeItem(at: compiledDestURL) // 既存のファイルがある場合は削除
+            let compiledURL = try MLModel.compileModel(at: destinationURL)
+            try fileManager.moveItem(at: compiledURL, to: compiledDestURL) // ファイルをリネームして移動
+            print("Compiled mlmodel file: \(compiledDestURL.lastPathComponent)")
+            print("Downloaded file: \(destinationURL.lastPathComponent)")
+        } catch {
+            print("Error moving file: \(error)")
+        }
+}
+
+func getDestinationURL(for fileName: String) -> URL {
+    // ファイルを保存するディレクトリのパスを取得
+    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    // ファイル名を結合して保存先のURLを生成
+    let destinationURL = documentsDirectory.appendingPathComponent(fileName)
+    return destinationURL
+}
+
