@@ -40,8 +40,8 @@ class MenuViewController: UITableViewController {
     }
     else if segue.identifier == "CameraPredictNeuralNetwork" {
       let viewController = segue.destination as! CameraPredictViewController
-      viewController.model = Models.loadTrainedNeuralNetwork()
-      viewController.title = "Neural Network"
+      //viewController.model = Models.loadTrainedNeuralNetwork()
+      //viewController.title = "Neural Network"
     }
   }
 
