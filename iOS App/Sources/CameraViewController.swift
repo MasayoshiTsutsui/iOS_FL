@@ -11,10 +11,11 @@ import Vision
   On the Simulator this uses the photo library instead of the camera.
  */
 class CameraViewController: UIViewController {
-  @IBOutlet var cameraButton: UIBarButtonItem!
+
   @IBOutlet var imageView: UIImageView!
   @IBOutlet var textView: UITextView!
-
+  @IBOutlet var cameraButton: UIBarButtonItem!
+    
   var model: MLModel!
   var predictor: Predictor!
 

@@ -5,13 +5,9 @@ import CoreML
   View controller for the "Training Neural Network" screen.
  */
 class TrainNeuralNetworkViewController: UIViewController {
-  @IBOutlet var oneEpochButton: UIButton!
   @IBOutlet var tenEpochsButton: UIButton!
   @IBOutlet var stopButton: UIButton!
   @IBOutlet var submitButton: UIButton!
-  @IBOutlet var learningRateLabel: UILabel!
-  @IBOutlet var learningRateSlider: UISlider!
-  @IBOutlet var augmentationSwitch: UISwitch!
   @IBOutlet var statusLabel: UILabel!
   @IBOutlet var tableView: UITableView!
   @IBOutlet var headerLabel: UILabel!
@@ -36,11 +32,6 @@ class TrainNeuralNetworkViewController: UIViewController {
 
     stopButton.isEnabled = false
     statusLabel.text = "Paused"
-    augmentationSwitch.isOn = settings.isAugmentationEnabled
-
-    learningRateSlider.value = Float(log10(settings.learningRate))
-    learningRateLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: .regular)
-    updateLearningRateLabel()
 
     headerLabel.font = UIFont.monospacedSystemFont(ofSize: 12, weight: .regular)
     headerLabel.sizeToFit()
@@ -91,10 +82,6 @@ class TrainNeuralNetworkViewController: UIViewController {
     stopTraining()
   }
 
-  @IBAction func oneEpochTapped(_ sender: Any) {
-    startTraining(epochs: 1)
-  }
-
   @IBAction func tenEpochsTapped(_ sender: Any) {
     startTraining(epochs: 10)
   }
@@ -108,24 +95,9 @@ class TrainNeuralNetworkViewController: UIViewController {
     }
   }
 
-  @IBAction func learningRateSliderMoved(_ sender: UISlider) {
-    settings.learningRate = pow(10, Double(sender.value))
-    updateLearningRateLabel()
-  }
-
-  @IBAction func augmentationSwitchTapped(_ sender: UISwitch) {
-    settings.isAugmentationEnabled = sender.isOn
-  }
-
-  func updateLearningRateLabel() {
-    learningRateLabel.text = String(String(format: "%.6f", settings.learningRate).prefix(8))
-  }
 
   func updateButtons() {
-    oneEpochButton.isEnabled = !isTraining
     tenEpochsButton.isEnabled = !isTraining
-    learningRateSlider.isEnabled = !isTraining
-    augmentationSwitch.isEnabled = !isTraining
     stopButton.isEnabled = isTraining
     submitButton.isEnabled = doneTraining && !isTraining
   }
@@ -142,7 +114,7 @@ extension TrainNeuralNetworkViewController {
     statusLabel.text = "Training..."
     updateButtons()
 
-    trainer.train(epochs: epochs, learningRate: settings.learningRate, callback: trainingCallback)
+      trainer.train(epochs: epochs, learningRate: 0.001, callback: trainingCallback)
   }
 
   func stopTraining() {

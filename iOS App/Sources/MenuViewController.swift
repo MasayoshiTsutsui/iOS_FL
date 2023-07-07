@@ -10,7 +10,6 @@ class MenuViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "Menu", style: .plain, target: nil, action: nil)
-    backgroundTrainingSwitch.isOn = settings.isBackgroundTrainingEnabled
 
     Models.copyEmptyNearestNeighbors()
     Models.copyEmptyNeuralNetwork()
@@ -39,8 +38,8 @@ class MenuViewController: UITableViewController {
       viewController.dataset = testingDataset
       viewController.title = "Neural Network"
     }
-    else if segue.identifier == "CameraNeuralNetwork" {
-      let viewController = segue.destination as! CameraViewController
+    else if segue.identifier == "CameraPredictNeuralNetwork" {
+      let viewController = segue.destination as! CameraPredictViewController
       viewController.model = Models.loadTrainedNeuralNetwork()
       viewController.title = "Neural Network"
     }
@@ -68,7 +67,4 @@ class MenuViewController: UITableViewController {
     history.delete()
   }
 
-  @IBAction func backgroundTrainingSwitchTapped(_ sender: UISwitch) {
-    settings.isBackgroundTrainingEnabled = backgroundTrainingSwitch.isOn
-  }
 }

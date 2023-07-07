@@ -44,6 +44,7 @@
 		7BE1EF3A22BD1D2500DC3AAE /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */; };
 		7BF7B37F214422CE0010448E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7B37E214422CE0010448E /* UIImage+Resize.swift */; };
 		A9CE6EB42A4568AE00AA4AF8 /* LoadModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */; };
+		A9D3F17C2A54688B000E5A23 /* CameraPredictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		7BF7B37E214422CE0010448E /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModelViewController.swift; sourceTree = "<group>"; };
+		A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPredictViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				7B43807122B6783E0034AE3C /* CameraViewController.swift */,
+				A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */,
 			);
 			name = "Camera screen";
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				7B43806F22B6600D0034AE3C /* HandskNN.mlmodel in Sources */,
 				7B43806522B424CD0034AE3C /* Helpers.swift in Sources */,
 				7BE1EF3422BD1CE600DC3AAE /* ExampleCell.swift in Sources */,
+				A9D3F17C2A54688B000E5A23 /* CameraPredictViewController.swift in Sources */,
 				7B43806322B422E00034AE3C /* HandsTuri.mlmodel in Sources */,
 				7B89B55122B6D235002DBA36 /* Settings.swift in Sources */,
 				7B43806D22B650650034AE3C /* HandsEmpty.mlmodel in Sources */,
