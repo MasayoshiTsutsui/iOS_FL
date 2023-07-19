@@ -1,7 +1,10 @@
 import UIKit
+import CoreML
 
 class CameraPredictViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var model: MLModel!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -14,6 +17,7 @@ class CameraPredictViewController: UIViewController, UIImagePickerControllerDele
         picker.delegate = self
         // UIImagePickerController カメラを起動する
         present(picker, animated: true, completion: nil)
+        print("camera on!")
     }
 
     /// シャッターボタンを押下した際、確認メニューに切り替わる
@@ -21,11 +25,21 @@ class CameraPredictViewController: UIViewController, UIImagePickerControllerDele
     ///   - picker: ピッカー
     ///   - info: 写真情報
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("image picker !!!")
         let image = info[.originalImage] as! UIImage
-        // "写真を使用"を押下した際、写真アプリに保存する
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        // UIImagePickerController カメラが閉じる
-        self.dismiss(animated: true, completion: nil)
+
+        dismiss(animated: true) {
+            self.performSegue(withIdentifier: "showPrediction", sender: image)
+            print("to showPrediction!!!!")
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPrediction" {
+            let predictionViewController = segue.destination as! PredictionViewController
+            predictionViewController.image = sender as? UIImage
+            predictionViewController.model = model
+        }
     }
 }
 

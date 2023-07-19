@@ -164,9 +164,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zS7-6Y-eBM">
-                                <rect key="frame" x="142" y="50" width="91" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a photo and predict!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsd-Q5-FMK">
+                                <rect key="frame" x="63" y="60" width="249.5" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zS7-6Y-eBM">
+                                <rect key="frame" x="137.5" y="128" width="100" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="UKd-PS-n45"/>
+                                    <constraint firstAttribute="height" constant="75" id="los-K4-bqp"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" image="camera.fill" catalog="system" title=""/>
                                 <connections>
@@ -176,6 +185,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j0f-rp-ySA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bsd-Q5-FMK" firstAttribute="centerX" secondItem="neQ-Gt-TME" secondAttribute="centerX" id="CgE-gX-IGb"/>
+                            <constraint firstItem="bsd-Q5-FMK" firstAttribute="top" secondItem="j0f-rp-ySA" secondAttribute="top" constant="60" id="E3b-cu-2bW"/>
+                            <constraint firstItem="zS7-6Y-eBM" firstAttribute="top" secondItem="bsd-Q5-FMK" secondAttribute="bottom" constant="40" id="UEr-Lj-v72"/>
+                            <constraint firstItem="zS7-6Y-eBM" firstAttribute="centerX" secondItem="neQ-Gt-TME" secondAttribute="centerX" id="yy0-K2-ElZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Camera" id="MlN-Ho-fz5">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="o6f-ZL-Xg2">
@@ -184,10 +199,71 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="uvu-8p-vbQ" kind="show" identifier="showPrediction" id="r4x-wI-eZh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XH4-Ps-rv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4061.5999999999999" y="886.50674662668678"/>
+            <point key="canvasLocation" x="4021.5999999999999" y="886.50674662668678"/>
+        </scene>
+        <!--Prediction View Controller-->
+        <scene sceneID="el2-Jg-KkS">
+            <objects>
+                <viewController id="uvu-8p-vbQ" customClass="PredictionViewController" customModule="Gestures" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U6A-Me-2AK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4s-uI-Eo1">
+                                <rect key="frame" x="62.5" y="50" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="5mY-U2-ysf"/>
+                                    <constraint firstAttribute="height" constant="250" id="BcB-Tx-TeL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Predicted Label is..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nws-8N-Vhx">
+                                <rect key="frame" x="88" y="320" width="199.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqi-Bb-aXX">
+                                <rect key="frame" x="174.5" y="369" width="26.5" height="51.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confidence: 0 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIc-aA-068">
+                                <rect key="frame" x="95" y="440.5" width="185" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DZV-Pb-9f5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Bqi-Bb-aXX" firstAttribute="top" secondItem="Nws-8N-Vhx" secondAttribute="bottom" constant="20" id="4I8-tk-pel"/>
+                            <constraint firstItem="Bqi-Bb-aXX" firstAttribute="centerX" secondItem="U6A-Me-2AK" secondAttribute="centerX" id="VSV-Rh-6dn"/>
+                            <constraint firstItem="xIc-aA-068" firstAttribute="top" secondItem="Bqi-Bb-aXX" secondAttribute="bottom" constant="20" id="VuA-Vs-tia"/>
+                            <constraint firstItem="e4s-uI-Eo1" firstAttribute="top" secondItem="DZV-Pb-9f5" secondAttribute="top" constant="50" id="fr0-u6-EKk"/>
+                            <constraint firstItem="xIc-aA-068" firstAttribute="centerX" secondItem="U6A-Me-2AK" secondAttribute="centerX" id="mhW-bt-dKa"/>
+                            <constraint firstItem="Nws-8N-Vhx" firstAttribute="centerX" secondItem="U6A-Me-2AK" secondAttribute="centerX" id="n66-sR-mAd"/>
+                            <constraint firstItem="Nws-8N-Vhx" firstAttribute="top" secondItem="e4s-uI-Eo1" secondAttribute="bottom" constant="20" id="wlP-hu-LTs"/>
+                            <constraint firstItem="e4s-uI-Eo1" firstAttribute="centerX" secondItem="U6A-Me-2AK" secondAttribute="centerX" id="xBb-0D-ttT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qKd-d9-gWB"/>
+                    <connections>
+                        <outlet property="confidence" destination="xIc-aA-068" id="64U-cR-7IR"/>
+                        <outlet property="imageview" destination="e4s-uI-Eo1" id="VP3-Ck-3oz"/>
+                        <outlet property="predictedLabel" destination="Bqi-Bb-aXX" id="1mb-ry-8co"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hrI-j6-BUg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4853.6000000000004" y="886.50674662668678"/>
         </scene>
         <!--Train Neural Network-->
         <scene sceneID="diK-he-f2T">

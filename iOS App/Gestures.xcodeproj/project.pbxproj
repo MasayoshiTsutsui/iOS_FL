@@ -43,6 +43,7 @@
 		7BE1EF3822BD1D1700DC3AAE /* EvaluateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1EF3722BD1D1700DC3AAE /* EvaluateCell.swift */; };
 		7BE1EF3A22BD1D2500DC3AAE /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */; };
 		7BF7B37F214422CE0010448E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7B37E214422CE0010448E /* UIImage+Resize.swift */; };
+		A93ED1052A6125500044EF62 /* PredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93ED1042A6125500044EF62 /* PredictionViewController.swift */; };
 		A9CE6EB42A4568AE00AA4AF8 /* LoadModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */; };
 		A9D3F17C2A54688B000E5A23 /* CameraPredictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		7BE1EF3722BD1D1700DC3AAE /* EvaluateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateCell.swift; sourceTree = "<group>"; };
 		7BE1EF3922BD1D2500DC3AAE /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		7BF7B37E214422CE0010448E /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		A93ED1042A6125500044EF62 /* PredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionViewController.swift; sourceTree = "<group>"; };
 		A9CE6EB32A4568AE00AA4AF8 /* LoadModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadModelViewController.swift; sourceTree = "<group>"; };
 		A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPredictViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 			children = (
 				7B43807122B6783E0034AE3C /* CameraViewController.swift */,
 				A9D3F17B2A54688A000E5A23 /* CameraPredictViewController.swift */,
+				A93ED1042A6125500044EF62 /* PredictionViewController.swift */,
 			);
 			name = "Camera screen";
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				7B8AF1A720D8311600DE58D5 /* MenuViewController.swift in Sources */,
 				7B43806B22B574CA0034AE3C /* ImageLoader.swift in Sources */,
 				7B322AE122FEFFE2002C7C38 /* Globals.swift in Sources */,
+				A93ED1052A6125500044EF62 /* PredictionViewController.swift in Sources */,
 				7B43805322B3F2360034AE3C /* EvaluateViewController.swift in Sources */,
 				7B72E0F9238DC2D100A1F15F /* NeuralNetworkTrainer.swift in Sources */,
 				7B89B54F22B6C73D002DBA36 /* Predictor.swift in Sources */,
