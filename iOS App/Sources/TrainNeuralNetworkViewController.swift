@@ -31,7 +31,8 @@ class TrainNeuralNetworkViewController: UIViewController {
     tableView.contentInset = .zero
 
     stopButton.isEnabled = false
-    statusLabel.text = "Paused"
+    submitButton.isEnabled = false
+    statusLabel.text = "Train Loss"
 
     headerLabel.font = UIFont.monospacedSystemFont(ofSize: 12, weight: .regular)
     headerLabel.sizeToFit()
@@ -97,7 +98,7 @@ class TrainNeuralNetworkViewController: UIViewController {
 
 
   func updateButtons() {
-    tenEpochsButton.isEnabled = !isTraining
+    tenEpochsButton.isEnabled = !doneTraining && !isTraining
     stopButton.isEnabled = isTraining
     submitButton.isEnabled = doneTraining && !isTraining
   }
@@ -125,7 +126,7 @@ extension TrainNeuralNetworkViewController {
   func trainingStopped() {
     isTraining = false
     doneTraining = true
-    statusLabel.text = "Paused"
+    statusLabel.text = "Train Loss"
     updateButtons()
   }
 
