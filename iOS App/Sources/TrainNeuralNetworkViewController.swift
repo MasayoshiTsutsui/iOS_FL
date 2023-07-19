@@ -94,6 +94,9 @@ class TrainNeuralNetworkViewController: UIViewController {
     if submitModelParams(self.model) {
       self.performSegue(withIdentifier: "toSubmitSucceed", sender: nil)
     }
+    else {
+      self.performSegue(withIdentifier: "toSubmitFail", sender: nil)
+    }
   }
 
 
